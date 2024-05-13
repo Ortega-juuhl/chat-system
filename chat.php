@@ -29,14 +29,14 @@ if (isset($friendId) && isset($friendName)) {
     // Check if new messages are available
     $new_messages = false;
     while ($row = mysqli_fetch_assoc($result)) {
-        // Check if the message is new (based on some criteria)
-        // If new message found, set $new_messages to true
-        // Example: You can compare the timestamp of the message with the last message seen by the user
-        // For simplicity, I'm assuming all messages are new
         $new_messages = true;
-        // Display the message
+        // Display the message and delete button
         if ($row['sender_id'] == $user_id) {
             echo "<div>Me: " . $row['content'] . " (" . $row['timestamp'] . ")</div>";
+            echo "<form action='delete_message.php' method='post'>";
+            echo "<input type='hidden' name='message_id' value='" . $row['message_id'] . "'>";
+            echo "<button type='submit'>Delete</button>";
+            echo "</form>";
         } else {
             echo "<div>" . $friendName . ": " . $row['content'] . " (" . $row['timestamp'] . ")</div>";
         }
