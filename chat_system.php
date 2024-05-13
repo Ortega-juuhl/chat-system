@@ -64,24 +64,27 @@ $resultSelectFriends = $conn->query($selectFriendsQuery);
     </div>
     
     <div class="friend-container">
-        <?php
-        // ...Your existing code...
+    <?php
+    if ($resultSelectFriends->num_rows > 0) {
+        echo "Friends: <br> <br>";
 
-        if ($resultSelectFriends->num_rows > 0) {
-            echo "Friends: <br> <br>";
-            while ($row = $resultSelectFriends->fetch_assoc()) {
-                echo "<form action='chat.php' method='post'>";
-                echo "<button name='friendName' type='submit' value='" . $row['name'] . "'>" . $row['name'] . "</button>";
-                echo "<input type='hidden' name='friendId' value='" . $row['friend_id'] . "'>";
-                echo "</form>";
+        while ($row = $resultSelectFriends->fetch_assoc()) {
+            // Start a form for each friend
+            echo "<form action='chat.php' method='post'>";
+            // Use a button to submit the form and display friend's name
+            echo "<button type='submit' name='friendId' value='" . $row['friend_id'] . "'>" . $row['name'] . "</button>";
+            // Use a hidden input field to store friend's name
+            echo "<input type='hidden' name='friendName' value='" . $row['name'] . "'>";
+            echo "<input type='hidden' name='friendId' value='" . $row['friend_id'] . "'>";
+            echo "</form>";
 
-                echo "<br>";
-            }
-        } else {
-            echo "You don't have any friends yet.";
+            echo "<br>";
         }
+    } else {
+        echo "You don't have any friends yet.";
+    }
     ?>
+</div>
 
-    </div>
 </body>
 </html>

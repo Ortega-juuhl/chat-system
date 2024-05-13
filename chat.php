@@ -2,15 +2,52 @@
 session_start();
 include 'db_connect.php';
 
-// Get user ID and friend ID
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page or display an error message
+    header("Location: login.php");
+    exit;
+}
+
+// Retrieve friend ID and name from POST data and set them into session variables
+if(isset($_POST['friendId']) && isset($_POST['friendName'])) {
+    $_SESSION['friendId'] = $_POST['friendId'];
+    $_SESSION['friendName'] = $_POST['friendName'];
+}
+
+// Get user ID and friend ID from session
 $user_id = $_SESSION['user_id'];
-$friendId = $_POST['friendId'];
-$friendName = $_POST['friendName'];
+$friendId = $_SESSION['friendId'];
+$friendName = $_SESSION['friendName'];
 
-// Fetch messages from the database
-$get_chat = "SELECT * FROM messages WHERE (receiver_id = $friendId AND sender_id = $user_id) OR (receiver_id = $user_id AND sender_id = $friendId) ORDER BY timestamp";
-$result = mysqli_query($conn, $get_chat);
+// Check if both friendId and friendName are set
+if (isset($friendId) && isset($friendName)) {
+    // Fetch messages from the database
+    $get_chat = "SELECT * FROM messages WHERE (receiver_id = $friendId AND sender_id = $user_id) OR (receiver_id = $user_id AND sender_id = $friendId) ORDER BY timestamp";
+    $result = mysqli_query($conn, $get_chat);
 
+    // Check if new messages are available
+    $new_messages = false;
+    while ($row = mysqli_fetch_assoc($result)) {
+        // Check if the message is new (based on some criteria)
+        // If new message found, set $new_messages to true
+        // Example: You can compare the timestamp of the message with the last message seen by the user
+        // For simplicity, I'm assuming all messages are new
+        $new_messages = true;
+        // Display the message
+        if ($row['sender_id'] == $user_id) {
+            echo "<div>Me: " . $row['content'] . " (" . $row['timestamp'] . ")</div>";
+        } else {
+            echo "<div>" . $friendName . ": " . $row['content'] . " (" . $row['timestamp'] . ")</div>";
+        }
+    }
+
+    // If new messages are available, refresh the page after a certain interval
+    if ($new_messages) {
+        // Redirect to the same page after 5 seconds
+        header("refresh:5");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,23 +59,14 @@ $result = mysqli_query($conn, $get_chat);
 </head>
 <body>
 <div class="chat-container">
-    <!-- Display chat history -->
-    <div class="chat-history">
-        <?php
-        // Loop through the messages and display them
-        while ($row = mysqli_fetch_assoc($result)) {
-            // Check if the message is from the user or the friend and display accordingly
-            if ($row['sender_id'] == $user_id) {
-                echo "<div>Me: " . $row['content'] . " (" . $row['timestamp'] . ")</div>";
-            } else {
-                echo "<div>" . $friendName . ": " . $row['content'] . " (" . $row['timestamp'] . ")</div>";
-            }
-        }
-        ?>
+    <!-- Chat history -->
+    <div class="chat-history" id="chat-history">
+        <!-- Display chat history -->
+        <!-- Existing messages will be displayed here -->
     </div>
 
     <!-- Send message form -->
-    <form action="send_chat.php" method="post">
+    <form id="send-message-form" action="send_chat.php" method="post">
         <input type="hidden" name="friend_id" value="<?php echo $friendId; ?>">
         <input type="text" name="message" placeholder="Type your message">
         <input type="submit" value="Send">
