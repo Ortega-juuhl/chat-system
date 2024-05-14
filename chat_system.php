@@ -69,15 +69,15 @@ $resultSelectFriends = $conn->query($selectFriendsQuery);
         echo "Friends: <br> <br>";
 
         while ($row = $resultSelectFriends->fetch_assoc()) {
-            // Start a form for each friend
             echo "<form action='chat.php' method='post'>";
-            // Use a button to submit the form and display friend's name
             echo "<button type='submit' name='friendId' value='" . $row['friend_id'] . "'>" . $row['name'] . "</button>";
-            // Use a hidden input field to store friend's name
             echo "<input type='hidden' name='friendName' value='" . $row['name'] . "'>";
             echo "<input type='hidden' name='friendId' value='" . $row['friend_id'] . "'>";
             echo "</form>";
 
+            echo "<form action='remove_friend.php' method='post'>";
+            echo "<button type='submit' name='friendId' value='" . $row['friend_id'] . "'>x</button>";
+            echo "</form>";
             echo "<br>";
         }
     } else {
