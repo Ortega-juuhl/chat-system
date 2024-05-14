@@ -59,13 +59,6 @@ if (isset($friendId) && isset($friendName)) {
 </head>
 <body>
 <div class="chat-container">
-    <!-- Chat history -->
-    <div class="chat-history" id="chat-history">
-        <!-- Display chat history -->
-        <!-- Existing messages will be displayed here -->
-    </div>
-
-    <!-- Send message form -->
     <form id="send-message-form" action="send_chat.php" method="post">
         <input type="hidden" name="friend_id" value="<?php echo $friendId; ?>">
         <input type="text" name="message" placeholder="Type your message">
