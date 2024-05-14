@@ -71,6 +71,8 @@ if (isset($friendId) && isset($friendName)) {
         <input type="text" name="message" placeholder="Type your message">
         <input type="submit" value="Send">
     </form>
+    <a href="chat_system.php" class="back-btn"><i class="fas fa-arrow-left back-icon"></i>Back</a>
+
 </div>
 </body>
 </html>

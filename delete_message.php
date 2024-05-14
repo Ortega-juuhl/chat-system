@@ -18,5 +18,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo '<script>alert("Failed to get message_id, please try again later."); window.location.href = "chat.php";</script>';
 }
-//jeg vet ikke hvorfor dette ikke fungerer
 ?>
