@@ -4,7 +4,8 @@ CREATE TABLE Users (
     name VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    online_status ENUM('online', 'offline') DEFAULT 'offline'
+    online_status ENUM('online', 'offline') DEFAULT 'offline',
+    is_admin BOOLEAN DEFAULT false
 );
 
 -- Create Messages Table (unchanged)
