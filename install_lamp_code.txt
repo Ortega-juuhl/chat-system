@@ -1,0 +1,5 @@
+cd /var/www/html
+
+sudo chmod +x install_lamp.sh
+
+./install_lamp.sh
