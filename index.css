@@ -79,3 +79,7 @@
 .friend-container p {
     font-style: italic;
 }
+
+.report-form{
+    display: none;
+}

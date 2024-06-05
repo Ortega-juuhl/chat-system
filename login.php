@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashed_password = $row['password'];
             $verify_password = password_verify($password, $hashed_password);
             if ($verify_password) {
-                echo '<script>alert("Login successful."); window.location.href = "chat_system.php";</script>';
+                echo '<script>alert("Login successful."); window.location.href = "index.php";</script>';
             } else {
                 echo "Incorrect password.";
             }

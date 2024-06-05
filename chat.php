@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Retrieve friend ID and name from POST data and set them into session variables
-if(isset($_POST['friendId']) && isset($_POST['friendName'])) {
+if (isset($_POST['friendId']) && isset($_POST['friendName'])) {
     $_SESSION['friendId'] = $_POST['friendId'];
     $_SESSION['friendName'] = $_POST['friendName'];
 }
@@ -23,7 +23,12 @@ $friendName = $_SESSION['friendName'];
 // Check if both friendId and friendName are set
 if (isset($friendId) && isset($friendName)) {
     // Fetch messages from the database
-    $get_chat = "SELECT * FROM messages WHERE (receiver_id = $friendId AND sender_id = $user_id) OR (receiver_id = $user_id AND sender_id = $friendId) ORDER BY timestamp";
+    $get_chat = "
+    SELECT * 
+    FROM messages 
+    WHERE (receiver_id = $friendId AND sender_id = $user_id) 
+       OR (receiver_id = $user_id AND sender_id = $friendId) 
+    ORDER BY timestamp";
     $result = mysqli_query($conn, $get_chat);
 
     // Check if new messages are available
@@ -44,7 +49,6 @@ if (isset($friendId) && isset($friendName)) {
 
     // If new messages are available, refresh the page after a certain interval
     if ($new_messages) {
-        // Redirect to the same page after 5 seconds
         header("refresh:5");
     }
 }
@@ -60,12 +64,11 @@ if (isset($friendId) && isset($friendName)) {
 <body>
 <div class="chat-container">
     <form id="send-message-form" action="send_chat.php" method="post">
-        <input type="hidden" name="friend_id" value="<?php echo $friendId; ?>">
+        <input type="hidden" name="friend_id" value="<?php echo htmlspecialchars($friendId); ?>">
         <input type="text" name="message" placeholder="Type your message">
         <input type="submit" value="Send">
     </form>
-    <a href="chat_system.php" class="back-btn"><i class="fas fa-arrow-left back-icon"></i>Back</a>
-
+    <a href="index.php" class="back-btn"><i class="fas fa-arrow-left back-icon"></i>Back</a>
 </div>
 </body>
 </html>

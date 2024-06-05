@@ -104,3 +104,11 @@ input[type="email"] {
 .delete-button:hover {
     background-color: #c82333;
 }
+
+.display-visible {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}

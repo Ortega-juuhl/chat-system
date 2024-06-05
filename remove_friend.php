@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Check if the query was successful
         if($result){
-            echo '<script>alert("Removed friend."); window.location.href = "chat_system.php";</script>';
+            echo '<script>alert("Removed friend."); window.location.href = "index.php";</script>';
         } else {
-            echo '<script>alert("Failed to remove friend."); window.location.href = "chat_system.php";</script>';
+            echo '<script>alert("Failed to remove friend."); window.location.href = "index.php";</script>';
         }
     } else {
         echo "Friend ID not provided.";

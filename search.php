@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<button type='submit'>Add</button>";
             echo "</form>";
         } else {
-            echo '<script>alert("You can\'t send a friend request to yourself."); window.location.href = "chat_system.php";</script>';
+            echo '<script>alert("You can\'t send a friend request to yourself."); window.location.href = "index.php";</script>';
         }
     } else {
         echo "No user found with username '$search'.";
