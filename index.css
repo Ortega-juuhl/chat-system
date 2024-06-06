@@ -1,81 +1,106 @@
-/* Reset some default styles */
-* {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #36393f;
+    color: #ffffff;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-/* Styles for the navbar */
 .navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-}
-
-.navbar .container {
+    background-color: #2f3136;
+    padding: 10px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
 .navbar a {
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
+    padding: 10px;
 }
 
-/* Styles for the container */
+.navbar a:hover {
+    background-color: #40444b;
+    border-radius: 5px;
+}
+
 .container {
-    max-width: 960px;
-    margin: 0 auto;
     padding: 20px;
 }
 
-/* Styles for the search container */
 .search-container {
     margin-bottom: 20px;
 }
 
 .search-container input[type="text"] {
+    width: calc(100% - 100px);
     padding: 10px;
-    width: 200px;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    border: none;
     margin-right: 10px;
 }
 
 .search-container input[type="submit"] {
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
+    padding: 10px;
     border-radius: 5px;
+    border: none;
+    background-color: #7289da;
+    color: #ffffff;
     cursor: pointer;
 }
 
-/* Styles for the friend container */
+.search-container input[type="submit"]:hover {
+    background-color: #5a6cb2;
+}
+
 .friend-container {
-    border: 1px solid #ccc;
+    background-color: #2f3136;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .friend-container h2 {
+    margin-top: 0;
+}
+
+.friend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #3a3e47;
+    border-radius: 5px;
     margin-bottom: 10px;
 }
 
-.friend-container button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
+.friend-form {
+    margin: 0;
+}
+
+.friend button {
+    background-color: #7289da;
+    color: #ffffff;
     border: none;
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.friend-container button + button {
+.friend button:hover {
+    background-color: #5a6cb2;
+}
+
+.friend button.remove {
+    background-color: #e74c3c;
+}
+
+.friend button.remove:hover {
+    background-color: #c0392b;
+}
+
+.fa-bell {
+    color: #ffcc00;
     margin-left: 10px;
 }
 
-.friend-container p {
-    font-style: italic;
-}

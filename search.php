@@ -15,17 +15,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($user_ID != $searchUserID) {
             $_SESSION['friend_request_user_id'] = $searchUserID;
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Result</title>
+    <link rel="stylesheet" href="search.css">
 
-            echo "Search result for " . $search. ":" . "<br>";
-            echo "Username:" . $search . "<br>"; // Display the searched username
-            echo "Status:" . $row['online_status'] . "<br>" . "<br>";
-
-            echo "<form action='add_friend.php' method='post'>";
-            echo "<input type='hidden' name='searchUserID' value='$searchUserID'>";
-            echo "<button type='submit'>Add</button>";
-            echo "</form>";
+</head>
+<body>
+    <div class="search-result">
+        <h2>Search result for <?php echo $search; ?>:</h2>
+        <p>Username: <?php echo $search; ?></p>
+        <p>Status: <?php echo $row['online_status']; ?></p>
+        <form action="add_friend.php" method="post">
+            <input type="hidden" name="searchUserID" value="<?php echo $searchUserID; ?>">
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</body>
+</html>
+<?php
         } else {
-            echo '<script>alert("You can\'t send a friend request to yourself."); window.location.href = "chat_system.php";</script>';
+            echo '<script>alert("You can\'t send a friend request to yourself."); window.location.href = "index.php";</script>';
         }
     } else {
         echo "No user found with username '$search'.";

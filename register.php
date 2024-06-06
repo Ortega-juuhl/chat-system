@@ -4,6 +4,12 @@ session_start();
 include 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if the policies checkbox is checked
+    if (!isset($_POST['accept_policies'])) {
+        echo '<script>alert("You must accept the policies to register."); window.history.back();</script>';
+        exit();
+    }
+
     $name = $_POST["name"];
     $username = $_POST["username"];
     $password = $_POST["password"];

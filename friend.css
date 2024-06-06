@@ -1,0 +1,90 @@
+/* Existing CSS */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #36393f;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.friend-requests-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #2f3136;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.friend-request {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #40444b;
+    border-radius: 5px;
+}
+
+.friend-name {
+    flex-grow: 1;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.friend-action-form {
+    display: inline;
+}
+
+button.btn {
+    padding: 8px 12px;
+    margin-left: 10px;
+    background-color: #7289da;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn.accept-btn {
+    background-color: #43b581;
+}
+
+button.btn.accept-btn:hover {
+    background-color: #3a946b;
+}
+
+button.btn.reject-btn {
+    background-color: #f04747;
+}
+
+button.btn.reject-btn:hover {
+    background-color: #d73a49;
+}
+
+.no-requests {
+    text-align: center;
+    font-size: 16px;
+    color: #b9bbbe;
+}
+
+/* Home button styles */
+.home-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #7289da;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #5b6eae;
+}
