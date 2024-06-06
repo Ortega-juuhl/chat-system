@@ -93,3 +93,11 @@ a.home-button:hover {
 a.home-button:active {
     background-color: #5b6eae;
 }
+
+.display-visible {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}

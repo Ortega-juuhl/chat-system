@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Retrieve friend ID and name from POST data and set them into session variables
-if(isset($_POST['friendId']) && isset($_POST['friendName'])) {
+if (isset($_POST['friendId']) && isset($_POST['friendName'])) {
     $_SESSION['friendId'] = $_POST['friendId'];
     $_SESSION['friendName'] = $_POST['friendName'];
 }
@@ -19,6 +19,39 @@ if(isset($_POST['friendId']) && isset($_POST['friendName'])) {
 $user_id = $_SESSION['user_id'];
 $friendId = $_SESSION['friendId'];
 $friendName = $_SESSION['friendName'];
+
+// Check if both friendId and friendName are set
+if (isset($friendId) && isset($friendName)) {
+    // Fetch messages from the database
+    $get_chat = "
+    SELECT * 
+    FROM messages 
+    WHERE (receiver_id = $friendId AND sender_id = $user_id) 
+       OR (receiver_id = $user_id AND sender_id = $friendId) 
+    ORDER BY timestamp";
+    $result = mysqli_query($conn, $get_chat);
+
+    // Check if new messages are available
+    $new_messages = false;
+    while ($row = mysqli_fetch_assoc($result)) {
+        $new_messages = true;
+        // Display the message and delete button
+        if ($row['sender_id'] == $user_id) {
+            echo "<div>Me: " . $row['content'] . " (" . $row['timestamp'] . ")</div>";
+            echo "<form action='delete_message.php' method='post'>";
+            echo "<input type='hidden' name='message_id' value='" . $row['message_id'] . "'>";
+            echo "<button type='submit'>Delete</button>";
+            echo "</form>";
+        } else {
+            echo "<div>" . $friendName . ": " . $row['content'] . " (" . $row['timestamp'] . ")</div>";
+        }
+    }
+
+    // If new messages are available, refresh the page after a certain interval
+    if ($new_messages) {
+        header("refresh:5");
+    }
+}
 ?>
 
 <!DOCTYPE html>

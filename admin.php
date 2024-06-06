@@ -33,5 +33,4 @@ if ($result) {
 } else {
     echo "You are not an admin";
 }
-
 ?>

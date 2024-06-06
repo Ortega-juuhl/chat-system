@@ -104,3 +104,13 @@ body {
     margin-left: 10px;
 }
 
+<<<<<<< HEAD
+=======
+.friend-container p {
+    font-style: italic;
+}
+
+.report-form{
+    display: none;
+}
+>>>>>>> 5edaea36266ccc33c59404f5a1e7fa4b76beff80
