@@ -11,15 +11,16 @@ body {
 }
 
 .faq-container {
-    width: 600px; /* Preset width */
+    width: 90%; /* Updated width to be more scalable */
+    max-width: 600px; /* Maximum width */
     padding: 20px;
-    background-color: #2f3136; /* Background color similar to user settings page */
-    border-radius: 10px; /* Adding border radius for container */
-    position: fixed; /* Positioning */
+    background-color: #2f3136;
+    border-radius: 10px;
+    position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centering */
-    text-align: center; /* Centering the content */
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .faq-title {
@@ -29,7 +30,7 @@ body {
 }
 
 .faq-item {
-    margin-bottom: 20px; /* Increased margin between FAQ items */
+    margin-bottom: 20px;
 }
 
 .faq-checkbox {
@@ -75,4 +76,11 @@ body {
 
 .home-button:active {
     background-color: #5b6eae;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 600px) {
+    .faq-container {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
 }
