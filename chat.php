@@ -5,7 +5,7 @@ include 'db_connect.php';
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page or display an error message
-    header("Location: login.php");
+    header("Location: login.html");
     exit;
 }
 
@@ -46,16 +46,9 @@ if (isset($friendId) && isset($friendName)) {
 <div class="chat-messages">
     <?php
     // Check if both friendId and friendName are set
-    if (isset($friendId) && isset($friendName)) {
-        // Fetch messages from the database
-        $get_chat = "SELECT * FROM messages WHERE (receiver_id = $friendId AND sender_id = $user_id) OR (receiver_id = $user_id AND sender_id = $friendId) ORDER BY timestamp";
-        $result = mysqli_query($conn, $get_chat);
-
         // Check if new messages are available
-        $new_messages = false;
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $new_messages = true;
                 // Display the message and delete button
                 if ($row['sender_id'] == $user_id) {
                     echo "<div class='chat-message me'><div>Me: " . $row['content'] . " (" . $row['timestamp'] . ")</div></div>";
@@ -70,7 +63,6 @@ if (isset($friendId) && isset($friendName)) {
         } else {
             echo "<div class='no-messages'>No messages have been sent yet.</div>";
         }
-    }
     ?>
 </div>
 <div class="chat-container">

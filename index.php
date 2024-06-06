@@ -39,7 +39,7 @@ $isAdmin = $resultAdminCheck->fetch_assoc()['is_admin'];
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="friend.php">Friend requests</a>
+            <a href="friend.php">Friend requests <i class="fa-solid fa-user-plus"></i> </a>
             <?php 
             $checkFriendRequest = "SELECT * FROM FriendRequests WHERE receiver_id = $user_id AND status = 'pending'";
             $resultFriendRequestCheck = $conn->query($checkFriendRequest);
@@ -47,12 +47,12 @@ $isAdmin = $resultAdminCheck->fetch_assoc()['is_admin'];
                 echo "<i class='fa-solid fa-bell'></i>";
             }
             ?>
-            <a href="usersettings.html">User settings</a>
-            <a href="logout.php">Logout</a>
-            <a href="Faq.html">Faq</a>
+            <a href="Faq.html">Faq <i class="fa-solid fa-question"></i> </a>
+            <a href="usersettings.html">Settings <i class="fa-solid fa-gear"></i> </a>
+            <a href="logout.php">Logout <i class="fa-solid fa-right-from-bracket"></i> </a>
             <?php
             if ($isAdmin == True) {
-                echo "<a href='admin.php'>Admin</a>";
+                echo "<a href='admin.php'>Admin <i class='fa-solid fa-unlock'></i> </a>";
             }
             ?>
         </div>
@@ -76,7 +76,6 @@ $isAdmin = $resultAdminCheck->fetch_assoc()['is_admin'];
                     echo "<form action='chat.php' method='post' class='friend-form'>";
                     echo "<button type='submit' name='friendId' value='" . $row['friend_id'] . "'>" . $row['name'] . "</button>";
                     echo "<input type='hidden' name='friendName' value='" . $row['name'] . "'>";
-                    echo "<input type='hidden' name='friendId' value='" . $row['friend_id'] . "'>";
                     echo "</form>";
 
                     echo "<form action='remove_friend.php' method='post' class='friend-form'>";

@@ -1,103 +1,95 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 body {
+    font-family: Arial, sans-serif;
     background-color: #36393f;
     color: #ffffff;
-    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 .usersettings {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    background-color: #2f3136;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 600px;
+    text-align: center;
 }
 
-h2 {
-    text-align: center;
+.usersettings h2 {
     margin-bottom: 20px;
-    color: #7289da;
+    font-size: 24px;
 }
 
 .change-input {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #4f545c;
-    border: none;
-    color: #ffffff;
+.change-input form {
+    display: flex;
+    flex-direction: column;
+}
+
+.change-input input[type="text"],
+.change-input input[type="email"],
+.change-input input[type="password"] {
+    padding: 12px;
+    margin-bottom: 15px;
     border-radius: 5px;
+    border: none;
+    background-color: #202225;
+    color: #ffffff;
+    font-size: 16px;
 }
 
-input[type="text"]::placeholder,
-input[type="email"]::placeholder,
-input[type="password"]::placeholder {
-    color: #b9bbbe;
+.change-input input[type="text"]::placeholder,
+.change-input input[type="email"]::placeholder,
+.change-input input[type="password"]::placeholder {
+    color: #9e9e9e;
 }
 
-button.btn {
-    display: block;
-    width: calc(100% - 20px);
-    padding: 10px;
+.change-input button[type="submit"] {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
     background-color: #7289da;
     color: #ffffff;
-    border: none;
-    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-button.btn:hover {
-    background-color: #677bc4;
-}
-
-button.btn:active {
-    background-color: #5b6eae;
+.change-input button[type="submit"]:hover {
+    background-color: #5865f2;
 }
 
 .delete-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
     background-color: #f04747;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .delete-button:hover {
-    background-color: #d73a49;
+    background-color: #ff6969;
 }
 
-.delete-button:active {
-    background-color: #cb2d3e;
-}
-
-a.home-button {
+.home-button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
     background-color: #7289da;
     color: #ffffff;
+    font-size: 16px;
     text-decoration: none;
-    border-radius: 5px;
-    float: right;
+    margin-top: 20px;
 }
 
-a.home-button:hover {
-    background-color: #677bc4;
-}
-
-a.home-button:active {
-    background-color: #5b6eae;
-}
-
-.display-visible {
-    display: block;
-}
-
-.display-none {
-    display: none;
+.home-button:hover {
+    background-color: #5865f2;
 }

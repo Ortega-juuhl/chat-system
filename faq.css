@@ -11,9 +11,15 @@ body {
 }
 
 .faq-container {
-    max-width: 800px;
-    margin: 0 auto;
+    width: 600px; /* Preset width */
     padding: 20px;
+    background-color: #2f3136; /* Background color similar to user settings page */
+    border-radius: 10px; /* Adding border radius for container */
+    position: fixed; /* Positioning */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centering */
+    text-align: center; /* Centering the content */
 }
 
 .faq-title {
@@ -23,7 +29,7 @@ body {
 }
 
 .faq-item {
-    margin-bottom: 10px;
+    margin-bottom: 20px; /* Increased margin between FAQ items */
 }
 
 .faq-checkbox {
@@ -61,7 +67,6 @@ body {
     text-decoration: none;
     border-radius: 5px;
     margin-top: 20px;
-    float: right;
 }
 
 .home-button:hover {
