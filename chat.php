@@ -20,17 +20,6 @@ $user_id = $_SESSION['user_id'];
 $friendId = $_SESSION['friendId'];
 $friendName = $_SESSION['friendName'];
 
-// Check if both friendId and friendName are set
-if (isset($friendId) && isset($friendName)) {
-    // Fetch messages from the database
-    $get_chat = "
-    SELECT * 
-    FROM messages 
-    WHERE (receiver_id = $friendId AND sender_id = $user_id) 
-       OR (receiver_id = $user_id AND sender_id = $friendId) 
-    ORDER BY timestamp";
-    $result = mysqli_query($conn, $get_chat);
-}
 ?>
 
 <!DOCTYPE html>
@@ -41,29 +30,11 @@ if (isset($friendId) && isset($friendName)) {
     <title>Chat</title>
     <link rel="stylesheet" href="chat.css">
     <script src="https://kit.fontawesome.com/9e81387435.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<div class="chat-messages">
-    <?php
-    // Check if both friendId and friendName are set
-        // Check if new messages are available
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                // Display the message and delete button
-                if ($row['sender_id'] == $user_id) {
-                    echo "<div class='chat-message me'><div>Me: " . $row['content'] . " (" . $row['timestamp'] . ")</div></div>";
-                    echo "<form action='delete_message.php' method='post' class='delete-message-form'>";
-                    echo "<input type='hidden' name='message_id' value='" . $row['message_id'] . "'>";
-                    echo "<button type='submit' class='delete-button'>Delete</button>";
-                    echo "</form>";
-                } else {
-                    echo "<div class='chat-message friend'><div>" . $friendName . ": " . $row['content'] . " (" . $row['timestamp'] . ")</div></div>";
-                }
-            }
-        } else {
-            echo "<div class='no-messages'>No messages have been sent yet.</div>";
-        }
-    ?>
+<div class="chat-messages" id="chat-messages">
+    <!-- Messages will be loaded here dynamically -->
 </div>
 <div class="chat-container">
     <form id="send-message-form" action="send_chat.php" method="post" class="send-message-form">
@@ -73,5 +44,48 @@ if (isset($friendId) && isset($friendName)) {
     </form>
     <a href="index.php" class="back-btn"><i class="fas fa-arrow-left back-icon"></i>Back</a>
 </div>
+
+<script>
+function fetchMessages() {
+    $.ajax({
+    url: 'fetch_messages.php', // URL to send the AJAX request to
+    method: 'GET', // HTTP method to use for the request (GET)
+    success: function(data) { // Function to run if the request is successful
+        var messages = JSON.parse(data); // Parse the JSON response from the server
+        var chatMessages = $('#chat-messages'); // Get the element with ID 'chat-messages'
+        chatMessages.empty(); // Clear any existing messages in the chat container
+
+        if (messages.length > 0) { // Check if there are any messages
+            messages.forEach(function(message) { // Loop through each message
+                // Create a div for the message with a class based on who sent it (me or friend)
+                var messageDiv = '<div class="chat-message ' + 
+                    (message.sender_id == <?php echo $user_id; ?> ? 'me' : 'friend') + '">';
+                // Add the message content to the div
+                messageDiv += '<div>' + 
+                    (message.sender_id == <?php echo $user_id; ?> ? 'Me' : '<?php echo $friendName; ?>') + 
+                    ': ' + message.content + ' (' + message.timestamp + ')</div>';
+                messageDiv += '</div>';
+                
+                // If the message was sent by the logged-in user, add a delete button
+                if (message.sender_id == <?php echo $user_id; ?>) {
+                    messageDiv += '<form action="delete_message.php" method="post" class="delete-message-form">';
+                    messageDiv += '<input type="hidden" name="message_id" value="' + message.message_id + '">';
+                    messageDiv += '<button type="submit" class="delete-button">Delete</button>';
+                    messageDiv += '</form>';
+                }
+                // Append the message div to the chat container
+                chatMessages.append(messageDiv);
+            });
+        } else {
+            // If no messages are found, display a placeholder message
+            chatMessages.append('<div class="no-messages">No messages have been sent yet.</div>');
+        }
+    }
+});
+}
+
+setInterval(fetchMessages, 1000);
+fetchMessages();
+</script>
 </body>
 </html>

@@ -36,6 +36,12 @@
                         echo "<input type='hidden' name='delete_user_id' value='" . $user_row['user_id'] . "'>";
                         echo "<button type='submit' class='delete-button'>Delete <i class='fas fa-trash-alt'></i> </button>";
                         echo "</form>";
+
+                        echo "<form action='delete_user.php' method='post'>";
+                        echo "<input type='hidden' name='delete_user_id' value='" . $user_row['user_id'] . "'>";
+                        echo "<button type='submit' class='delete-button'>Make Admin <i class='fas fa-trash-alt'></i> </button>";
+                        echo "</form>";
+
                         echo "</div>";
                     }
                 } else {
