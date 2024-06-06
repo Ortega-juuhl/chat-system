@@ -116,8 +116,8 @@
                     while ($user_row = mysqli_fetch_assoc($user_result)) {
                         echo "<div class='user'>";
                         echo "<span class='username'>Username: " . $user_row['username'] . "</span>";
-                        echo "<form action='ban.php' method='post'>";
-                        echo "<input type='hidden' name='user_ban_id' value='" . $user_row['user_id'] . "'>";
+                        echo "<form action='delete_user.php' method='post'>";
+                        echo "<input type='hidden' name='delete_user_id' value='" . $user_row['user_id'] . "'>";
                         echo "<button type='submit' class='delete-button'>Delete <i class='fas fa-trash-alt'></i> </button>";
                         echo "</form>";
                         echo "</div>";
