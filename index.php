@@ -53,7 +53,7 @@ $isAdmin = $resultAdminCheck->fetch_assoc()['is_admin'];
             <?php
             if ($isAdmin == True) {
                 echo "<a href='admin.php'>Admin</a>";
-            };
+            }
             ?>
         </div>
     </nav>

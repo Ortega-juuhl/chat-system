@@ -1,16 +1,13 @@
 <?php
 session_start();
+
 include 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $sql = "SELECT * FROM users WHERE username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql = "SELECT * FROM users WHERE username = '$username'";
 
     if ($result = $conn->query($sql)) {
         if ($result->num_rows > 0) {
@@ -26,12 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Incorrect password.";
             }
         } else {
-            echo '<script>alert("Incorrect password.");</script>';
+            echo "Username not found.";
         }
     } else {
-        echo '<script>alert("Username not found.");</script>';
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-    $stmt->close();
-    $conn->close();
 }
 ?>

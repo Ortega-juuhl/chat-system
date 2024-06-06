@@ -30,7 +30,6 @@ CREATE TABLE FriendRequests (
     FOREIGN KEY (receiver_id) REFERENCES Users(user_id)
 );
 
--- Updated Friends Table with is_typing column
 CREATE TABLE Friends (
     friendship_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -41,4 +40,15 @@ CREATE TABLE Friends (
     CONSTRAINT unique_friendship UNIQUE (user_id, friend_id)
 );
 
--- du må endre slik at venner blir adda til friend table. endre fra echo status accepted til den fra friend table
+CREATE TABLE Reports (
+    report_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    friend_id INT NOT NULL,
+    report_header VARCHAR(255) NOT NULL,
+    report_description TEXT NOT NULL,
+    report_type ENUM('harassment', 'spam', 'inappropriate_content', 'other') NOT NULL,
+    report_status ENUM('pending', 'resolved') DEFAULT 'pending',
+    report_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (friend_id) REFERENCES Users(user_id)
+);
