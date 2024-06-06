@@ -53,18 +53,22 @@ if (isset($friendId) && isset($friendName)) {
 
         // Check if new messages are available
         $new_messages = false;
-        while ($row = mysqli_fetch_assoc($result)) {
-            $new_messages = true;
-            // Display the message and delete button
-            if ($row['sender_id'] == $user_id) {
-                echo "<div class='chat-message me'><div>Me: " . $row['content'] . " (" . $row['timestamp'] . ")</div></div>";
-                echo "<form action='delete_message.php' method='post' class='delete-message-form'>";
-                echo "<input type='hidden' name='message_id' value='" . $row['message_id'] . "'>";
-                echo "<button type='submit' class='delete-button'>Delete</button>";
-                echo "</form>";
-            } else {
-                echo "<div class='chat-message friend'><div>" . $friendName . ": " . $row['content'] . " (" . $row['timestamp'] . ")</div></div>";
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $new_messages = true;
+                // Display the message and delete button
+                if ($row['sender_id'] == $user_id) {
+                    echo "<div class='chat-message me'><div>Me: " . $row['content'] . " (" . $row['timestamp'] . ")</div></div>";
+                    echo "<form action='delete_message.php' method='post' class='delete-message-form'>";
+                    echo "<input type='hidden' name='message_id' value='" . $row['message_id'] . "'>";
+                    echo "<button type='submit' class='delete-button'>Delete</button>";
+                    echo "</form>";
+                } else {
+                    echo "<div class='chat-message friend'><div>" . $friendName . ": " . $row['content'] . " (" . $row['timestamp'] . ")</div></div>";
+                }
             }
+        } else {
+            echo "<div class='no-messages'>No messages have been sent yet.</div>";
         }
     }
     ?>
